@@ -1,0 +1,38 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "driacom-prompt-ai-generator",
+	"compatibility_date": "2026-08-15",
+	"compatibility_flags": [
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "driacom-prompt-ai-generator"
+		}
+	],
+	"routes": [
+		{
+			"pattern": "app.driacom.com",
+			"custom_domain": true
+		}
+	],
+	"images": {
+		"binding": "IMAGES"
+	},
+	"kv_namespaces": [
+		
+		{
+			"binding": "DRIACOM_VISITOR_KV",
+			"id": "84fe5d59ed4c45acb65db9bf9fcc9a61"
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}

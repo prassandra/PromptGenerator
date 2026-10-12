@@ -1,0 +1,66 @@
+{
+  "version": "2.1.0",
+  "name": "Driacom Visual Storyboard Execution System",
+  "principle": "STORYBOARD_IMAGE_IS_VISUAL_SOURCE_OF_TRUTH",
+  "video_engine_max_seconds": 10,
+  "outputs": ["Character Sheet", "Visual Storyboard", "Video Prompt"],
+  "workflow": [
+    "Input",
+    "Character Sheet when characters are required",
+    "Story Director",
+    "Visual Storyboard Sheet per scene",
+    "Storyboard Validation",
+    "Video Prompt per clip/scene",
+    "Video Generation"
+  ],
+  "engines": {
+    "animation": {
+      "label": "Prompt AI Animasi",
+      "modalTitle": "Storyboard Animasi",
+      "focus": ["visual", "motion", "camera", "transition", "sound"]
+    },
+    "storytelling": {
+      "label": "Prompt AI Storytelling",
+      "modalTitle": "Storyboard Storytelling",
+      "focus": ["story arc", "character", "emotion", "dialogue", "continuity"]
+    },
+    "affiliate": {
+      "label": "Prompt AI Affiliate",
+      "modalTitle": "Storyboard Affiliate",
+      "focus": ["hook", "product reveal", "demo", "proof", "benefit", "cta"],
+      "hard_selling": true,
+      "product_lock": true
+    }
+  },
+  "scene_sheet": {
+    "panels": 4,
+    "fields": [
+      "timeline",
+      "purpose",
+      "visual",
+      "action",
+      "expression_or_state",
+      "camera_shot",
+      "camera_angle",
+      "camera_movement",
+      "product_or_object_interaction",
+      "dialogue_or_narration",
+      "transition",
+      "continuity"
+    ]
+  },
+  "clip_rules": {
+    "max_seconds": 10,
+    "prefer_scene_boundaries": true,
+    "never_split_critical_action_arbitrarily": true,
+    "show_clip_number_and_timecode": true
+  },
+  "locks": [
+    "character_identity",
+    "product_identity",
+    "environment_continuity",
+    "wardrobe_continuity",
+    "camera_language",
+    "scene_to_scene_state"
+  ]
+}
