@@ -229,13 +229,13 @@ function PromptCard({
 }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0b1019]">
-      <div className="flex items-center justify-between gap-4 border-b border-white/10 px-5 py-4">
-        <div className="flex min-w-0 items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10 text-lg">
+      <div className="flex items-center justify-between gap-2.5 border-b border-white/10 px-3.5 py-3 sm:px-5 sm:py-4">
+        <div className="flex min-w-0 flex-1 items-center gap-2.5 sm:gap-3">
+          <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10 text-base sm:text-lg">
             {icon}
           </div>
 
-          <h3 className="truncate text-base font-bold text-white">
+          <h3 className="truncate text-xs sm:text-sm md:text-base font-bold text-white">
             {title}
           </h3>
         </div>
@@ -246,7 +246,7 @@ function PromptCard({
             onCopy(text, copyId)
           }
           disabled={!text}
-          className="shrink-0 rounded-xl border border-cyan-400/25 bg-cyan-400/10 px-4 py-2.5 text-sm font-bold text-cyan-200 transition hover:bg-cyan-400/20 disabled:opacity-30"
+          className="shrink-0 rounded-xl border border-cyan-400/25 bg-cyan-400/10 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold text-cyan-200 transition hover:bg-cyan-400/20 active:scale-95 disabled:opacity-30"
         >
           {copied === copyId
             ? "✓ Tersalin"
@@ -254,7 +254,7 @@ function PromptCard({
         </button>
       </div>
 
-      <pre className="max-h-[520px] overflow-auto whitespace-pre-wrap break-words p-5 font-mono text-[14px] leading-7 text-zinc-300">
+      <pre className="max-h-[520px] overflow-auto whitespace-pre-wrap break-words p-3.5 sm:p-5 font-mono text-xs sm:text-sm leading-relaxed text-zinc-300">
         {text || "Belum ada prompt."}
       </pre>
     </div>
@@ -284,27 +284,27 @@ function SceneCard({
     );
 
   return (
-    <article className="overflow-hidden rounded-3xl border border-white/[0.08] bg-[#0a0f17]">
-      <div className="border-b border-white/[0.07] bg-[#0d121b] px-5 py-5 sm:px-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-300">
+    <article className="overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#0a0f17]">
+      <div className="border-b border-white/[0.07] bg-[#0d121b] px-4 py-4 sm:px-6 sm:py-5">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0 flex-1">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-300">
               Scene {number}
             </p>
-            <h3 className="mt-1.5 text-xl font-bold text-white">
+            <h3 className="mt-1 text-base sm:text-xl font-bold text-white">
               {scene.title}
             </h3>
-            <p className="mt-2 max-w-2xl text-[14px] leading-6 text-zinc-400">
+            <p className="mt-1.5 max-w-2xl text-xs sm:text-[14px] leading-relaxed text-zinc-400">
               {scene.purpose}
             </p>
           </div>
-          <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/[0.07] px-3 py-2 text-xs font-bold text-cyan-200">
+          <div className="self-start sm:self-auto rounded-xl border border-cyan-400/20 bg-cyan-400/[0.07] px-2.5 py-1 text-[11px] sm:text-xs font-bold text-cyan-200">
             Image → Video
           </div>
         </div>
       </div>
 
-      <div className="space-y-4 p-5 sm:p-6">
+      <div className="space-y-3.5 p-3.5 sm:space-y-4 sm:p-6">
         <PromptCard
           icon="🖼️"
           title={`Image Prompt — Scene ${number}`}
@@ -753,21 +753,21 @@ export default function AnimationGeneratorPage() {
 
       <div className="flex min-h-screen w-full flex-col lg:flex-row">
         <PremiumSidebar active="animation" />
-        <div className="relative min-w-0 flex-1 px-5 sm:px-8 lg:px-10">
+        <div className="relative min-w-0 flex-1 px-3 py-4 sm:px-6 lg:px-10 pb-28 sm:pb-20">
 
         {/* HEADER */}
-        <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-[#080a10]/90 px-4 py-3.5 backdrop-blur-xl sm:px-8">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-indigo-400">
+        <header className="sticky top-0 z-30 mb-5 rounded-2xl border border-white/[0.06] bg-[#080a10]/95 px-3.5 py-2.5 backdrop-blur-xl sm:px-6 sm:py-3.5">
+          <div className="flex items-center justify-between gap-2.5 sm:gap-4">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold text-indigo-400 sm:text-xs">
                 <span>Animation Director</span>
                 <span aria-hidden="true">·</span>
-                <span className="text-zinc-500">Visual & Storyboard Scene</span>
+                <span className="text-zinc-500 truncate">Visual & Storyboard</span>
               </div>
-              <h1 className="text-lg font-bold text-white sm:text-xl">Animation AI Studio</h1>
+              <h1 className="truncate text-base font-bold text-white sm:text-xl">Animation AI Studio</h1>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex shrink-0 items-center gap-2">
               <WorkspaceBackButton />
               <LanguageSwitcher compact />
             </div>
@@ -775,19 +775,19 @@ export default function AnimationGeneratorPage() {
         </header>
 
         {/* MAIN GRID */}
-        <div className="workspace-two-col grid gap-7 xl:gap-8">
+        <div className="workspace-two-col grid gap-6 xl:gap-8">
 
           {/* =================================================
              LEFT FORM
              ================================================= */}
-          <section className="workspace-form h-fit rounded-[28px] border border-white/[0.09] bg-gradient-to-br from-[#0b1019] to-[#080c14] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.18)] sm:p-6">
+          <section className="workspace-form h-fit rounded-2xl sm:rounded-[28px] border border-white/[0.09] bg-gradient-to-br from-[#0b1019] to-[#080c14] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.18)] sm:p-6">
 
-            <div className="mb-7">
-              <h2 className="mt-1 text-2xl font-bold text-white">
+            <div className="mb-6">
+              <h2 className="mt-1 text-xl sm:text-2xl font-bold text-white">
                 Buat Animasi
               </h2>
 
-              <p className="mt-2 text-[16px] leading-7 text-zinc-300">
+              <p className="mt-2 text-sm sm:text-[16px] leading-relaxed text-zinc-300">
                 Kamu cukup menentukan
                 arah cerita. Detail
                 produksi dikerjakan
@@ -947,7 +947,7 @@ export default function AnimationGeneratorPage() {
                   description="Driacom membuat identitas karakter otomatis."
                 />
 
-                <div className="grid grid-cols-5 gap-2.5">
+                <div className="grid grid-cols-5 gap-1.5 sm:gap-2.5">
                   {[1, 2, 3, 4, 5].map(
                     (count) => (
                       <button
@@ -958,12 +958,11 @@ export default function AnimationGeneratorPage() {
                             count
                           )
                         }
-                        className={
-                          characterCount ===
-                          count
+                        className={`rounded-xl py-2.5 sm:py-3 text-xs sm:text-sm font-bold transition active:scale-95 ${
+                          characterCount === count
                             ? activeOptionButtonClass
                             : optionButtonClass
-                        }
+                        }`}
                       >
                         {count}
                       </button>
@@ -971,8 +970,8 @@ export default function AnimationGeneratorPage() {
                   )}
                 </div>
 
-                <div className="mt-3 rounded-2xl border border-cyan-400/15 bg-cyan-400/[0.05] p-4">
-                  <p className="text-[15px] font-bold leading-6 text-cyan-100">
+                <div className="mt-3 rounded-2xl border border-cyan-400/15 bg-cyan-400/[0.05] p-3.5 sm:p-4">
+                  <p className="text-xs sm:text-[15px] font-bold leading-5 sm:leading-6 text-cyan-100">
                     ✓ Driacom membuat nama,
                     wajah, pakaian,
                     kepribadian, proporsi,
@@ -989,19 +988,19 @@ export default function AnimationGeneratorPage() {
                   description="Atur scene, durasi, ratio, dan bahasa."
                 />
 
-                <div className="rounded-2xl border border-white/12 bg-[#11141a] p-5">
+                <div className="rounded-2xl border border-white/12 bg-[#11141a] p-4 sm:p-5">
                   <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-[15px] font-bold text-zinc-100">
+                      <p className="text-sm sm:text-[15px] font-bold text-zinc-100">
                         Jumlah Scene
                       </p>
 
-                      <p className="mt-1 text-[14px] text-zinc-400">
+                      <p className="mt-0.5 text-xs sm:text-[14px] text-zinc-400">
                         1 sampai 10 scene
                       </p>
                     </div>
 
-                    <div className="flex h-12 min-w-14 items-center justify-center rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-3 text-xl font-bold text-cyan-200">
+                    <div className="flex h-10 w-12 sm:h-12 sm:min-w-14 items-center justify-center rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-2.5 text-lg sm:text-xl font-bold text-cyan-200">
                       {
                         selectedSceneCount
                       }
@@ -1022,10 +1021,10 @@ export default function AnimationGeneratorPage() {
                         event.target.value
                       )
                     }
-                    className="mt-5 w-full accent-cyan-400"
+                    className="mt-4 sm:mt-5 w-full accent-cyan-400 cursor-pointer"
                   />
 
-                  <div className="mt-2 flex justify-between text-[13px] font-bold text-zinc-500">
+                  <div className="mt-2 flex justify-between text-xs sm:text-[13px] font-bold text-zinc-500">
                     <span>1</span>
                     <span>5</span>
                     <span>10</span>
@@ -1040,7 +1039,7 @@ export default function AnimationGeneratorPage() {
                     Durasi per Scene
                   </label>
 
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
                     {[
                       "4 detik",
                       "6 detik",
@@ -1056,12 +1055,11 @@ export default function AnimationGeneratorPage() {
                               duration
                             )
                           }
-                          className={
-                            durationPerScene ===
-                            duration
+                          className={`rounded-xl px-1 py-2.5 sm:px-3 sm:py-3 text-xs font-bold transition active:scale-95 ${
+                            durationPerScene === duration
                               ? activeOptionButtonClass
                               : optionButtonClass
-                          }
+                          }`}
                         >
                           {duration.replace(
                             " detik",
@@ -1081,7 +1079,7 @@ export default function AnimationGeneratorPage() {
                     Ratio Video
                   </label>
 
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                     {[
                       "9:16",
                       "16:9",
@@ -1093,11 +1091,11 @@ export default function AnimationGeneratorPage() {
                         onClick={() =>
                           setRatio(item)
                         }
-                        className={
+                        className={`rounded-xl py-2.5 sm:py-3 text-xs font-bold transition active:scale-95 ${
                           ratio === item
                             ? activeOptionButtonClass
                             : optionButtonClass
-                        }
+                        }`}
                       >
                         {item}
                       </button>

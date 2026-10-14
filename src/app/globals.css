@@ -14,12 +14,23 @@ body {
 
 html, body {
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+/* Ensure no text or code block forces horizontal scroll */
+pre, code, textarea, input, p, h1, h2, h3, h4, span {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Touch targets and interactions */
+button, select, input, a {
+  touch-action: manipulation;
 }
 
 /* Custom modern scrollbars */
@@ -42,7 +53,6 @@ html, body {
 @supports (padding: env(safe-area-inset-top)) {
   body {
     padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
@@ -50,12 +60,14 @@ html, body {
 .workspace-two-col {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.5rem;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 100%;
 }
 
 @media (min-width: 1024px) {
   .workspace-two-col {
-    grid-template-columns: minmax(440px, 490px) minmax(0, 1fr);
+    grid-template-columns: minmax(430px, 480px) minmax(0, 1fr);
     align-items: start;
     gap: 2rem;
   }

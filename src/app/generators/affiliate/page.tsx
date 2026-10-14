@@ -174,20 +174,20 @@ export default function AffiliatePage() {
     <div className="flex min-h-screen w-full flex-col bg-[#080a10] text-slate-100 lg:flex-row">
       <PremiumSidebar active="affiliate" />
 
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 px-3 py-4 sm:px-6 lg:px-8 pb-28 sm:pb-20">
         {/* Header */}
-        <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-[#080a10]/90 px-4 py-3.5 backdrop-blur-xl sm:px-8">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-semibold text-indigo-400">
+        <header className="sticky top-0 z-30 mb-5 rounded-2xl border border-white/[0.06] bg-[#080a10]/95 px-3.5 py-2.5 backdrop-blur-xl sm:px-6 sm:py-3.5">
+          <div className="flex items-center justify-between gap-2.5 sm:gap-4">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5 text-[11px] font-semibold text-indigo-400 sm:text-xs">
                 <span>Affiliate Director</span>
                 <span aria-hidden="true">·</span>
-                <span className="text-zinc-500">Video Promosi & UGC</span>
+                <span className="text-zinc-500 truncate">Video Promosi & UGC</span>
               </div>
-              <h1 className="text-lg font-bold text-white sm:text-xl">Affiliate Video Engine</h1>
+              <h1 className="truncate text-base font-bold text-white sm:text-xl">Affiliate Video Engine</h1>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex shrink-0 items-center gap-2">
               <WorkspaceBackButton />
               <LanguageSwitcher compact />
             </div>
@@ -195,12 +195,12 @@ export default function AffiliatePage() {
         </header>
 
         {/* Main Workspace */}
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-8 sm:py-8">
+        <div className="mx-auto max-w-7xl">
           <div className="workspace-two-col">
             {/* Input Form Column */}
-            <section className="workspace-form rounded-2xl border border-white/[0.07] bg-[#0c1017] p-5 shadow-xl sm:p-6">
+            <section className="workspace-form rounded-2xl border border-white/[0.07] bg-[#0c1017] p-4 shadow-xl sm:p-6">
               <div className="mb-5 border-b border-white/[0.06] pb-4">
-                <h2 className="text-lg font-bold text-white">Parameter Produk & Konten</h2>
+                <h2 className="text-base sm:text-lg font-bold text-white">Parameter Produk & Konten</h2>
                 <p className="mt-1 text-xs text-zinc-400">
                   Unggah referensi foto produk untuk menghasilkan naskah, hook, dan storyboard siap pakai.
                 </p>
@@ -422,10 +422,10 @@ export default function AffiliatePage() {
                           key={dur}
                           disabled={loading}
                           onClick={() => update("durationPerScene", dur)}
-                          className={`rounded-lg border px-2 py-2 text-xs font-semibold transition ${
+                          className={`rounded-xl px-1 py-2.5 text-xs font-bold transition active:scale-95 ${
                             form.durationPerScene === dur
-                              ? "border-indigo-500/50 bg-indigo-600/25 text-white"
-                              : "border-white/10 bg-[#10141e] text-zinc-400 hover:text-white"
+                              ? "border border-indigo-500/60 bg-indigo-600/30 text-white shadow-sm shadow-indigo-950/40"
+                              : "border border-white/10 bg-[#10141e] text-zinc-400 hover:text-white"
                           }`}
                         >
                           {dur.split(" ")[0]}s
@@ -509,9 +509,9 @@ export default function AffiliatePage() {
                     {result.scenes.map((scene) => (
                       <div
                         key={scene.sceneNumber}
-                        className="rounded-xl border border-white/[0.07] bg-[#090d14] p-4 space-y-3"
+                        className="rounded-2xl border border-white/[0.07] bg-[#090d14] p-3.5 sm:p-4 space-y-3.5"
                       >
-                        <div className="flex items-center justify-between border-b border-white/[0.06] pb-2">
+                        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between border-b border-white/[0.06] pb-2.5">
                           <span className="text-xs font-bold text-white">
                             Scene {scene.sceneNumber} · {scene.timecode}
                           </span>
@@ -519,37 +519,37 @@ export default function AffiliatePage() {
                         </div>
 
                         <div>
-                          <div className="mb-1 flex items-center justify-between">
+                          <div className="mb-1.5 flex items-center justify-between gap-2">
                             <span className="text-[11px] font-semibold text-cyan-300">
                               1. Storyboard Image Prompt (Start-Frame)
                             </span>
                             <button
                               type="button"
                               onClick={() => copy(scene.storyboardImagePrompt, `img-${scene.sceneNumber}`)}
-                              className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-zinc-300 hover:text-white"
+                              className="shrink-0 rounded-lg border border-cyan-400/25 bg-cyan-400/10 px-2.5 py-1 text-xs font-semibold text-cyan-200 hover:bg-cyan-400/20 active:scale-95 transition"
                             >
                               {copied === `img-${scene.sceneNumber}` ? "✓ Tersalin" : "Salin"}
                             </button>
                           </div>
-                          <pre className="max-h-40 overflow-auto rounded-lg bg-[#06080d] p-2.5 text-xs text-zinc-300 whitespace-pre-wrap font-mono">
+                          <pre className="max-h-40 overflow-auto rounded-lg bg-[#06080d] p-3 text-xs leading-relaxed text-zinc-300 whitespace-pre-wrap break-words font-mono">
                             {scene.storyboardImagePrompt}
                           </pre>
                         </div>
 
                         <div>
-                          <div className="mb-1 flex items-center justify-between">
+                          <div className="mb-1.5 flex items-center justify-between gap-2">
                             <span className="text-[11px] font-semibold text-indigo-300">
                               2. Video Motion Prompt
                             </span>
                             <button
                               type="button"
                               onClick={() => copy(scene.videoPrompt, `vid-${scene.sceneNumber}`)}
-                              className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-zinc-300 hover:text-white"
+                              className="shrink-0 rounded-lg border border-cyan-400/25 bg-cyan-400/10 px-2.5 py-1 text-xs font-semibold text-cyan-200 hover:bg-cyan-400/20 active:scale-95 transition"
                             >
                               {copied === `vid-${scene.sceneNumber}` ? "✓ Tersalin" : "Salin"}
                             </button>
                           </div>
-                          <pre className="max-h-48 overflow-auto rounded-lg bg-[#06080d] p-2.5 text-xs text-zinc-300 whitespace-pre-wrap font-mono">
+                          <pre className="max-h-48 overflow-auto rounded-lg bg-[#06080d] p-3 text-xs leading-relaxed text-zinc-300 whitespace-pre-wrap break-words font-mono">
                             {scene.videoPrompt}
                           </pre>
                         </div>

@@ -657,24 +657,24 @@ Buat 8-12 hashtag yang relevan dengan cerita, genre, target penonton Indonesia, 
   }) => {
     return (
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025]">
-        <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-          <div className="flex items-center gap-3">
-            <span className="text-lg">{icon}</span>
+        <div className="flex items-center justify-between gap-2.5 border-b border-white/10 px-3.5 py-3 sm:px-5 sm:py-4">
+          <div className="flex min-w-0 flex-1 items-center gap-2.5 sm:gap-3">
+            <span className="text-base sm:text-lg shrink-0">{icon}</span>
 
-            <h3 className="font-semibold text-white">
+            <h3 className="truncate font-semibold text-white text-xs sm:text-sm md:text-base">
               {title}
             </h3>
           </div>
 
           <button
             onClick={() => copyText(text)}
-            className="rounded-lg border border-white/10 px-3 py-1.5 text-xs text-white/60 transition hover:bg-white/10 hover:text-white"
+            className="shrink-0 rounded-lg border border-cyan-400/25 bg-cyan-400/10 px-2.5 py-1 text-xs font-semibold text-cyan-200 transition hover:bg-cyan-400/20 active:scale-95"
           >
             Salin
           </button>
         </div>
 
-        <pre className="whitespace-pre-wrap px-5 py-5 font-sans text-sm leading-7 text-white/65">
+        <pre className="whitespace-pre-wrap break-words px-3.5 py-3.5 sm:px-5 sm:py-5 font-sans text-xs sm:text-sm leading-relaxed text-white/70">
           {text}
         </pre>
       </div>
@@ -685,30 +685,30 @@ Buat 8-12 hashtag yang relevan dengan cerita, genre, target penonton Indonesia, 
     <div className="flex min-h-screen w-full flex-col bg-[#07090e] text-slate-100 lg:flex-row">
       <PremiumSidebar active="short-story" />
 
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 px-3 py-4 sm:px-6 lg:px-8 pb-28 sm:pb-20">
         {/* HEADER */}
-        <header className="sticky top-0 z-30 border-b border-white/[0.07] bg-[#07090e]/90 px-4 py-3.5 backdrop-blur-xl sm:px-8">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
+        <header className="sticky top-0 z-30 mb-5 rounded-2xl border border-white/[0.07] bg-[#07090e]/95 px-3.5 py-2.5 backdrop-blur-xl sm:px-6 sm:py-3.5">
+          <div className="flex items-center justify-between gap-2.5 sm:gap-4">
+            <div className="flex min-w-0 flex-1 items-center gap-2.5 sm:gap-3">
               <WorkspaceBackButton />
-              <div>
+              <div className="min-w-0 flex-1">
                 <div className="text-[10px] font-semibold tracking-wider text-cyan-400 uppercase">
                   Studio Short-Form
                 </div>
-                <h1 className="text-base font-bold tracking-tight text-white sm:text-lg">
+                <h1 className="truncate text-base font-bold tracking-tight text-white sm:text-lg">
                   Short Story Generator
                 </h1>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex shrink-0 items-center gap-2">
               <LanguageSwitcher compact />
             </div>
           </div>
         </header>
 
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-8">
-          <div className="mb-6">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-5">
             <p className="max-w-2xl text-xs sm:text-sm leading-relaxed text-zinc-400">
               Buat cerita pendek yang emosional dan engaging lengkap dengan hook pembuka, alur 5 babak, prompt gambar, prompt video Google Flow, konsistensi karakter, voice over, dan caption.
             </p>
@@ -855,18 +855,18 @@ Buat 8-12 hashtag yang relevan dengan cerita, genre, target penonton Indonesia, 
 
               <AdShell placement="action" />
 
-              <div className="flex gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 pt-2">
 
                 <button
                   onClick={generate}
-                  className="flex-1 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-cyan-950/40 transition hover:brightness-110 active:scale-[0.99]"
+                  className="w-full sm:flex-1 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-cyan-950/40 transition hover:brightness-110 active:scale-[0.99]"
                 >
                   ✦ Buat Cerita
                 </button>
 
                 <button
                   onClick={reset}
-                  className="rounded-xl border border-white/10 px-5 py-3.5 text-sm text-zinc-400 transition hover:bg-white/5 hover:text-white"
+                  className="w-full sm:w-auto rounded-xl border border-white/10 px-5 py-3 text-sm text-zinc-400 transition hover:bg-white/5 hover:text-white"
                 >
                   Atur Ulang
                 </button>

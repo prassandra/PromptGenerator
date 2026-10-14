@@ -21,11 +21,11 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
 
   return (
     <label
-      className={`flex shrink-0 items-center gap-2 rounded-xl border border-white/10 bg-[#0b0e17]/95 px-3 py-2 text-xs font-medium text-zinc-300 backdrop-blur-xl ${
+      className={`flex shrink-0 items-center gap-1.5 rounded-xl border border-white/10 bg-[#0b0e17]/95 px-2.5 py-1.5 text-xs font-medium text-zinc-300 backdrop-blur-xl sm:px-3 sm:py-2 ${
         compact ? "" : "shadow-lg shadow-black/20"
       }`}
     >
-      <Languages className="h-3.5 w-3.5 text-cyan-400" />
+      <Languages className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
       <span className="hidden md:inline text-zinc-400">
         {language === "id" ? "Bahasa" : "Language"}
       </span>
@@ -35,8 +35,8 @@ export default function LanguageSwitcher({ compact = false }: { compact?: boolea
         className="cursor-pointer bg-transparent text-xs font-semibold text-white outline-none"
         aria-label={language === "id" ? "Pilih bahasa" : "Choose language"}
       >
-        <option value="id" className="bg-[#0b0e17] text-white">ID (Indonesia)</option>
-        <option value="en" className="bg-[#0b0e17] text-white">EN (English)</option>
+        <option value="id" className="bg-[#0b0e17] text-white">ID</option>
+        <option value="en" className="bg-[#0b0e17] text-white">EN</option>
       </select>
     </label>
   );
