@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../src/components/AccountBar.tsx"],"sourcesContent":["\"use client\";\nexport default function AccountBar(_props?: { name?: string; plan?: \"FREE\" | \"PRO\"; showLogoutButton?: boolean; floating?: boolean }) { return null; }\n"],"names":["AccountBar","_props"],"mappings":"wDACe,SAASA,AAAWC,CAAiG,EAAI,OAAO,IAAM"}

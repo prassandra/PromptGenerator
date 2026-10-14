@@ -1,8 +1,5 @@
 export type DriacomLanguage = "id" | "en";
 export const LANGUAGE_STORAGE_KEY = "driacom_language_v2";
-export const GATE_STORAGE_KEY = "driacom_social_gate_v3";
-export const BLOG_URL = process.env.NEXT_PUBLIC_BLOG_URL || "https://www.blogger.com/followers/follow/3986929889903697310?hl=id";
-export const TIKTOK_URL = process.env.NEXT_PUBLIC_TIKTOK_URL || "https://www.tiktok.com/@_driacom";
 
 const en: Record<string,string> = {
   "Prompt AI Generator":"AI Prompt Generator","Pilih engine Driacom sesuai jenis konten yang ingin kamu racik.":"Choose the Driacom engine for the type of content you want to create.",

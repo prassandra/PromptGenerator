@@ -3,28 +3,31 @@ import "./globals.css";
 import AdShell from "@/components/AdShell";
 import SiteFooter from "@/components/SiteFooter";
 import AppGate from "@/components/AppGate";
-import PageViewTracker from "@/components/PageViewTracker";
 
 export const metadata: Metadata = {
-  title: "Driacom AI Prompt Studio",
-  description: "Driacom Prompt AI Generator — gratis untuk semua creator.",
+  title: "Driacom AI Prompt Studio — Generator Video Animasi, Storytelling & Affiliate",
+  description: "Studio peracik prompt AI terlengkap dan gratis untuk video animasi, storytelling sinematik, dan konten affiliate.",
+  openGraph: {
+    title: "Driacom AI Prompt Studio",
+    description: "Studio peracik prompt AI terlengkap dan gratis untuk video animasi, storytelling sinematik, dan konten affiliate.",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="id">
-      <body className="min-h-full flex flex-col">
-        <PageViewTracker />
-        {/* One clean top banner instead of stacking multiple ads above the content. */}
-        <AdShell plan="FREE" placement="top" />
+      <body className="flex min-h-screen flex-col bg-[#07090e] text-slate-100 antialiased selection:bg-indigo-500/30 selection:text-white">
+        {/* High-CTR Sticky Top Billboard Banner */}
+        <AdShell placement="top" />
 
         <main className="flex min-h-0 flex-1 flex-col">
           <AppGate>{children}</AppGate>
         </main>
 
-        {/* Bottom inventory is genuinely after the page content and before the footer. */}
-        <AdShell plan="FREE" placement="bottom" />
-        <AdShell plan="FREE" placement="side" />
+        {/* High-CTR In-Stream Bottom & Desktop Side Anchor Ads */}
+        <AdShell placement="bottom" />
+        <AdShell placement="side" />
+        <AdShell placement="sticky-bottom" />
         <SiteFooter />
       </body>
     </html>

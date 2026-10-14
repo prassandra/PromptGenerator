@@ -1,7 +1,9 @@
 "use client";
 
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import VisitorToday from "@/components/VisitorToday";
+import PremiumSidebar from "@/components/PremiumSidebar";
+import AdShell from "@/components/AdShell";
+import WorkspaceBackButton from "@/components/WorkspaceBackButton";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -680,43 +682,40 @@ Buat 8-12 hashtag yang relevan dengan cerita, genre, target penonton Indonesia, 
   };
 
   return (
-    <main className="min-h-screen bg-[#08090d] text-white">
-      <div className="mx-auto max-w-7xl px-5 py-8 md:px-8">
+    <div className="flex min-h-screen w-full flex-col bg-[#07090e] text-slate-100 lg:flex-row">
+      <PremiumSidebar active="short-story" />
 
+      <div className="min-w-0 flex-1">
         {/* HEADER */}
-        <header className="sticky top-0 z-40 mb-10 flex items-start justify-between gap-6 border-b border-white/[0.07] bg-[#08090d]/95 px-2 py-4 backdrop-blur-xl">
-
-          <div>
-            <div className="mb-3 flex items-center gap-3">
-
-              <span className="rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-3 py-2 text-xl">
-                📖
-              </span>
-
+        <header className="sticky top-0 z-30 border-b border-white/[0.07] bg-[#07090e]/90 px-4 py-3.5 backdrop-blur-xl sm:px-8">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <WorkspaceBackButton />
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.2em] text-cyan-400/60">
-                  Generator Driacom
-                </p>
-
-                <h1 className="text-3xl font-bold tracking-tight">
-                  Short Story
+                <div className="text-[10px] font-semibold tracking-wider text-cyan-400 uppercase">
+                  Studio Short-Form
+                </div>
+                <h1 className="text-base font-bold tracking-tight text-white sm:text-lg">
+                  Short Story Generator
                 </h1>
               </div>
-
             </div>
 
-            <p className="max-w-2xl text-sm leading-6 text-white/45">
-              Buat cerita pendek yang emosional dan engaging lengkap
-              dengan hook, alur cerita, storyboard, prompt gambar,
-              prompt video, voice over, dan caption.
+            <div className="flex items-center gap-3">
+              <LanguageSwitcher compact />
+            </div>
+          </div>
+        </header>
+
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-8">
+          <div className="mb-6">
+            <p className="max-w-2xl text-xs sm:text-sm leading-relaxed text-zinc-400">
+              Buat cerita pendek yang emosional dan engaging lengkap dengan hook pembuka, alur 5 babak, prompt gambar, prompt video Google Flow, konsistensi karakter, voice over, dan caption.
             </p>
           </div>
 
-          <div className="flex w-full flex-wrap items-center justify-end gap-2 sm:w-auto"><VisitorToday className="w-full sm:w-auto" /><LanguageSwitcher compact /></div>
-        </header>
-
-        {/* CONTENT */}
-        <div className="grid gap-8 lg:grid-cols-[420px_1fr]">
+          {/* CONTENT */}
+          <div className="grid gap-8 lg:grid-cols-[420px_1fr]">
 
           {/* INPUT */}
           <section className="h-fit rounded-2xl border border-white/10 bg-white/[0.025] p-6">
@@ -854,18 +853,20 @@ Buat 8-12 hashtag yang relevan dengan cerita, genre, target penonton Indonesia, 
                 ]}
               />
 
+              <AdShell placement="action" />
+
               <div className="flex gap-3 pt-2">
 
                 <button
                   onClick={generate}
-                  className="flex-1 rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-black transition hover:bg-white/90 active:scale-[0.99]"
+                  className="flex-1 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-cyan-950/40 transition hover:brightness-110 active:scale-[0.99]"
                 >
                   ✦ Buat Cerita
                 </button>
 
                 <button
                   onClick={reset}
-                  className="rounded-xl border border-white/10 px-5 py-3.5 text-sm text-white/60 transition hover:bg-white/5 hover:text-white"
+                  className="rounded-xl border border-white/10 px-5 py-3.5 text-sm text-zinc-400 transition hover:bg-white/5 hover:text-white"
                 >
                   Atur Ulang
                 </button>
@@ -992,6 +993,8 @@ Buat 8-12 hashtag yang relevan dengan cerita, genre, target penonton Indonesia, 
                   text={output.voice}
                 />
 
+                <AdShell placement="result" />
+
                 <OutputCard
                   title="Caption"
                   icon="📝"
@@ -1006,12 +1009,8 @@ Buat 8-12 hashtag yang relevan dengan cerita, genre, target penonton Indonesia, 
 
         </div>
 
-        {/* FOOTER */}
-        <footer className="mt-12 border-t border-white/10 pt-6 text-center text-xs text-white/25">
-          Driacom AI Prompt Studio · Short Story
-        </footer>
-
       </div>
-    </main>
-  );
+    </div>
+  </div>
+);
 }

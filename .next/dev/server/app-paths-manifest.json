@@ -1,6 +1,0 @@
-{
-  "/api/usage/route": "app/api/usage/route.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/generators/animation/page": "app/generators/animation/page.js",
-  "/page": "app/page.js"
-}

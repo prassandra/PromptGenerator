@@ -1,11 +1,15 @@
 "use client";
-import { usePathname } from "next/navigation";
-import WebAds from "@/components/WebAds";
 
-type Placement = "top" | "mid" | "bottom" | "side";
+import WebAds, { type AdPlacement } from "@/components/WebAds";
 
-export default function AdShell({ plan, placement }: { plan: "FREE" | "PRO"; placement: Placement }) {
-  const pathname = usePathname();
-  if (pathname.startsWith("/admin")) return null;
-  return <WebAds plan={plan} placement={placement} />;
+export default function AdShell({
+  plan = "FREE",
+  placement,
+  className = "",
+}: {
+  plan?: "FREE" | "PRO";
+  placement: AdPlacement;
+  className?: string;
+}) {
+  return <WebAds plan={plan} placement={placement} className={className} />;
 }

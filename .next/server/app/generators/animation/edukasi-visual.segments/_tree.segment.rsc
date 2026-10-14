@@ -1,3 +1,0 @@
-:HL["/_next/static/chunks/3ewmoj6qg82xj.css","style"]
-:HL["/driacom-logo.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"generators","param":null,"prefetchHints":4192,"slots":{"children":{"name":"animation","param":null,"prefetchHints":4192,"slots":{"children":{"name":"edukasi-visual","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}}}},"staleTime":300,"buildId":"cIwTn0gsqrwkaMHrnZSLp"}

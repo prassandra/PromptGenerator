@@ -1,0 +1,7 @@
+{
+  "name": "Driacom AI Prompt Studio",
+  "description": "Studio peracik prompt AI terlengkap dan gratis untuk video animasi, storytelling sinematik, dan konten affiliate.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

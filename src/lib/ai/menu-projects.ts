@@ -35,16 +35,25 @@ const clean = (value: unknown) => String(value ?? "").trim();
 export function getMenuAIConfig(menu: DriacomMenu): MenuAIConfig {
   const env = ENV_MAP[menu];
 
+  const apiKey =
+    clean(process.env[env.apiKey]) ||
+    clean(process.env.GEMINI_API_KEY);
+
+  const model =
+    clean(process.env[env.model]) ||
+    clean(process.env.GEMINI_MODEL) ||
+    "gemini-2.5-flash";
+
+  const project =
+    clean(process.env[env.project]) ||
+    clean(process.env.GEMINI_PROJECT);
+
   return {
     menu,
-    projectId: clean(process.env[env.project]),
-    apiKey: clean(process.env[env.apiKey]),
-    model: clean(process.env[env.model]),
-    enabled: Boolean(
-      clean(process.env[env.project]) &&
-      clean(process.env[env.apiKey]) &&
-      clean(process.env[env.model])
-    ),
+    projectId: project,
+    apiKey,
+    model,
+    enabled: Boolean(apiKey),
   };
 }
 

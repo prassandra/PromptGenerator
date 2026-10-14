@@ -1,14 +1,4 @@
-import PremiumCategoryPage from "@/components/PremiumCategoryPage";
-
+import { redirect } from "next/navigation";
 export default function Page() {
-  return (
-    <PremiumCategoryPage
-      backHref="/generators/animation-menu"
-      backLabel="Animasi"
-      eyebrow="PROMPT ANIMASI"
-      title="OBJEK BICARA"
-      description="Buat objek atau benda menjadi karakter yang bisa berbicara."
-      tag="VISUAL"
-/>
-  );
+  redirect("/generators/animation?contentType=Objek+Bicara");
 }

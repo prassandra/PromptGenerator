@@ -1,14 +1,4 @@
-import PremiumCategoryPage from "@/components/PremiumCategoryPage";
-
+import { redirect } from "next/navigation";
 export default function Page() {
-  return (
-    <PremiumCategoryPage
-      backHref="/generators/animation-menu"
-      backLabel="Animasi"
-      eyebrow="PROMPT ANIMASI"
-      title="EKSPERIMEN & SAINS"
-      description="Visualisasikan eksperimen, fenomena, dan konsep sains secara menarik."
-      tag="EDUKASI"
-/>
-  );
+  redirect("/generators/animation?contentType=Eksperimen+%26+Sains");
 }

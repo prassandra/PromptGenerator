@@ -1,14 +1,4 @@
-import PremiumCategoryPage from "@/components/PremiumCategoryPage";
-
+import { redirect } from "next/navigation";
 export default function Page() {
-  return (
-    <PremiumCategoryPage
-      backHref="/generators/animation-menu"
-      backLabel="Animasi"
-      eyebrow="PROMPT ANIMASI"
-      title="WHAT IF"
-      description="Eksplorasi konsep bagaimana jika dengan visual AI yang menarik."
-      tag="IDEA"
-/>
-  );
+  redirect("/generators/animation?contentType=What+If");
 }

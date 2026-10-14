@@ -16,7 +16,7 @@ export const GEMINI_MODEL_CATALOG = [
   { id: "gemini-2.5-flash-native-audio-preview-12-2025", label: "Gemini 2.5 Flash Native Audio", category: "Audio / Legacy" },
 ] as const;
 
-export const DEFAULT_GEMINI_TEXT_MODEL = "gemini-3.6-flash";
+export const DEFAULT_GEMINI_TEXT_MODEL = "gemini-2.5-flash";
 
 /**
  * Central Gemini routing policy.
@@ -28,10 +28,9 @@ export const DEFAULT_GEMINI_TEXT_MODEL = "gemini-3.6-flash";
  * - Daily quota exhaustion receives a longer in-memory cooldown.
  */
 const DEFAULT_TEXT_FALLBACK_MODELS = [
-  "gemini-3.5-flash",
-  "gemini-3.5-flash-lite",
-  "gemini-3.1-flash-lite",
+  "gemini-2.5-flash",
   "gemini-2.5-flash-lite",
+  "gemini-2.5-pro",
 ];
 
 function normalizeModelName(name: string): string {

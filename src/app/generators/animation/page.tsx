@@ -1,16 +1,10 @@
 "use client";
 import AdShell from "@/components/AdShell";
-
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { usePromptUsage } from "@/lib/use-prompt-usage";
-
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import PremiumSidebar from "@/components/PremiumSidebar";
-import AccountBar from "@/components/AccountBar";
 import WorkspaceBackButton from "@/components/WorkspaceBackButton";
-import VisitorToday from "@/components/VisitorToday";
-import RewardTokenModal from "@/components/RewardTokenModal";
 
 import type {
   AnimationCharacter,
@@ -48,22 +42,22 @@ type IdeaOption = {
 
 
 const inputClass =
-  "w-full rounded-2xl border border-white/15 bg-[#12151c] px-5 py-4 text-[16px] font-medium text-white outline-none transition placeholder:text-zinc-400 focus:border-cyan-400/70 focus:bg-[#151922]";
+  "w-full rounded-xl border border-white/10 bg-[#10141e] px-4 py-3.5 text-sm font-medium text-white outline-none transition placeholder:text-zinc-500 focus:border-indigo-400/80 focus:bg-[#131926]";
 
 const textareaClass =
-  "w-full resize-none rounded-2xl border border-white/15 bg-[#12151c] px-5 py-4 text-[16px] leading-7 font-medium text-white outline-none transition placeholder:text-zinc-400 focus:border-cyan-400/70 focus:bg-[#151922]";
+  "w-full resize-none rounded-xl border border-white/10 bg-[#10141e] px-4 py-3.5 text-sm leading-relaxed font-medium text-white outline-none transition placeholder:text-zinc-500 focus:border-indigo-400/80 focus:bg-[#131926]";
 
 const selectClass =
-  "w-full rounded-2xl border border-white/15 bg-[#12151c] px-5 py-4 text-[16px] font-medium text-white outline-none transition focus:border-cyan-400/70";
+  "w-full rounded-xl border border-white/10 bg-[#10141e] px-4 py-3.5 text-sm font-medium text-white outline-none transition focus:border-indigo-400/80";
 
 const labelClass =
-  "mb-2.5 block text-[15px] font-bold text-zinc-100";
+  "mb-2 block text-xs font-semibold uppercase tracking-wider text-zinc-300";
 
 const optionButtonClass =
-  "rounded-2xl border border-white/15 bg-[#11141a] px-4 py-4 text-[15px] font-bold text-zinc-200 transition hover:border-cyan-400/40 hover:bg-cyan-400/[0.06] hover:text-white";
+  "rounded-xl border border-white/10 bg-[#10141e] px-3.5 py-3 text-xs font-semibold text-zinc-300 transition hover:border-indigo-400/40 hover:bg-indigo-950/20 hover:text-white";
 
 const activeOptionButtonClass =
-  "rounded-2xl border border-cyan-400/70 bg-cyan-400/15 px-4 py-4 text-[15px] font-bold text-cyan-100 shadow-[0_0_25px_rgba(34,211,238,0.08)]";
+  "rounded-xl border border-indigo-500/60 bg-indigo-600/20 px-3.5 py-3 text-xs font-bold text-white shadow-sm shadow-indigo-950/40";
 
 const ANIMATION_IDEA_PLACEHOLDERS: Record<string, string> = {
   "ASMR": "Contoh: Memotong sabun transparan dengan tekstur lembut dan suara potongan yang memuaskan...",
@@ -338,22 +332,15 @@ function SceneCard({
    ========================================================= */
 
 export default function AnimationGeneratorPage() {
-  const { status: usage, refresh: refreshUsage } = usePromptUsage("animation");
-  const usageBlocked = Boolean(usage && !usage.unlimited && (usage.remaining ?? 0) <= 0 && (usage.bonusTokens ?? 0) <= 0);
-  const [rewardOpen, setRewardOpen] = useState(false);
+  const initialForm = createDefaultAnimationForm();
 
-  const initialForm =
-    createDefaultAnimationForm();
-
-  const [form, setForm] =
-    useState<AnimationForm>(() => ({
-      ...initialForm,
-      concept: "",
-      scenes: "4",
-      duration: "8 detik",
-      characters:
-        buildCharacters(1),
-    }));
+  const [form, setForm] = useState<AnimationForm>(() => ({
+    ...initialForm,
+    concept: "",
+    scenes: "4",
+    duration: "8 detik",
+    characters: buildCharacters(1),
+  }));
 
   const [result, setResult] =
     useState<Output>(
@@ -407,6 +394,15 @@ export default function AnimationGeneratorPage() {
 
   const [ideaError, setIdeaError] =
     useState("");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const ct = params.get("contentType");
+    if (ct && (ANIMATION_CONTENT_TYPES as readonly string[]).includes(ct)) {
+      setGenre(ct);
+    }
+  }, []);
 
   /* =======================================================
      FORM UPDATE
@@ -524,7 +520,6 @@ export default function AnimationGeneratorPage() {
      ======================================================= */
 
   const handleGenerate = async () => {
-    if (usageBlocked) { setRewardOpen(true); return; }
     const concept =
       String(form.concept || "").trim();
 
@@ -641,7 +636,6 @@ export default function AnimationGeneratorPage() {
 
       setResult(data.output);
       setGenerated(true);
-      await refreshUsage();
 
       window.setTimeout(() => {
         document
@@ -747,7 +741,7 @@ export default function AnimationGeneratorPage() {
      ======================================================= */
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#050811] text-white">
+    <main className="min-h-screen overflow-x-hidden bg-[#07090e] text-slate-100">
       {/* BACKGROUND */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-cyan-500/[0.045] blur-[90px]" />
@@ -762,14 +756,21 @@ export default function AnimationGeneratorPage() {
         <div className="relative min-w-0 flex-1 px-5 sm:px-8 lg:px-10">
 
         {/* HEADER */}
-        <header className="sticky top-0 z-40 -mx-5 mb-8 border-b border-white/[0.07] bg-[#050811]/95 px-5 py-4 backdrop-blur-xl sm:-mx-8 sm:px-8 lg:-mx-10 lg:px-10">
-          <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
-            <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-[0.28em] text-cyan-300">Driacom — Prompt AI Generator</p>
-              <h1 className="mt-1 truncate font-serif text-2xl font-black tracking-tight text-white sm:text-3xl">Animation</h1>
-              <p className="mt-1 hidden text-sm text-zinc-500 sm:block">Ceritakan ide kamu. Detail produksi disusun otomatis oleh Driacom.</p>
+        <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-[#080a10]/90 px-4 py-3.5 backdrop-blur-xl sm:px-8">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-semibold text-indigo-400">
+                <span>Animation Director</span>
+                <span aria-hidden="true">·</span>
+                <span className="text-zinc-500">Visual & Storyboard Scene</span>
+              </div>
+              <h1 className="text-lg font-bold text-white sm:text-xl">Animation AI Studio</h1>
             </div>
-            <div className="flex w-full flex-wrap items-center justify-end gap-2 sm:w-auto"><VisitorToday className="w-full sm:w-auto" /><WorkspaceBackButton /><LanguageSwitcher compact /><AccountBar /></div>
+
+            <div className="flex items-center gap-2">
+              <WorkspaceBackButton />
+              <LanguageSwitcher compact />
+            </div>
           </div>
         </header>
 
@@ -1210,39 +1211,38 @@ export default function AnimationGeneratorPage() {
 
 
               {/* GENERATE */}
-              <div className="border-t border-white/10 pt-6">
+              <div className="border-t border-white/10 pt-5">
                 {aiLoading && (
-                  <div className="mb-3 rounded-2xl border border-cyan-400/20 bg-cyan-400/[0.06] p-4 text-[14px] font-semibold leading-6 text-cyan-100">
-                    🔒 Form dikunci sementara. Driacom sedang meracik prompt agar data yang diproses tetap konsisten.
+                  <div className="mb-3 rounded-xl border border-indigo-400/20 bg-indigo-950/20 p-3 text-xs font-medium text-indigo-200">
+                    ✦ Driacom sedang meracik prompt visual, konsistensi karakter, dan kamera...
                   </div>
                 )}
 
                 {aiError && (
-                  <div className="mb-3 rounded-2xl border border-red-400/20 bg-red-400/[0.06] p-4 text-[14px] font-semibold leading-6 text-red-200">
+                  <div className="mb-3 rounded-xl border border-red-500/30 bg-red-950/30 p-3 text-xs text-red-300">
                     {aiError}
                   </div>
                 )}
 
-                {!usage?.unlimited ? <p className="mb-3 text-center text-xs text-zinc-500">{usage ? (usageBlocked ? "Gratis 2x generate sudah habis. Tonton 2 iklan untuk +1 token atau upgrade ke PRO." : `Gratis ${usage.remaining ?? 0}x generate tersisa`) : "Mengecek kuota..."}</p> : null}
+                {/* High CTR Action Sponsor Unit */}
+                <AdShell placement="action" />
 
                 <button
                   type="button"
                   onClick={handleGenerate}
                   disabled={aiLoading}
-                  className="w-full rounded-2xl bg-cyan-400 px-5 py-5 text-[17px] font-bold text-black shadow-[0_10px_40px_rgba(34,211,238,0.15)] transition hover:bg-cyan-300 active:scale-[0.99] disabled:cursor-wait disabled:opacity-60"
+                  className="w-full rounded-xl bg-gradient-to-r from-indigo-500 via-indigo-600 to-cyan-500 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-950/50 transition hover:brightness-110 active:scale-[0.99] disabled:cursor-wait disabled:opacity-50"
                 >
-                  {aiLoading
-                    ? "✦ Driacom sedang meracik prompt..."
-                    : "✦ Racik Prompt"}
+                  {aiLoading ? "Sedang Meracik Prompt..." : "✦ Racik Prompt Animasi"}
                 </button>
 
                 <button
                   type="button"
                   onClick={reset}
                   disabled={aiLoading}
-                  className="mt-3 w-full rounded-2xl border border-white/12 bg-white/[0.04] px-5 py-4 text-[15px] font-bold text-zinc-300 transition hover:bg-white/[0.08] hover:text-white"
+                  className="mt-2.5 w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 text-xs font-semibold text-zinc-400 transition hover:bg-white/[0.07] hover:text-white"
                 >
-                  Reset
+                  Reset Form
                 </button>
               </div>
             </fieldset>
@@ -1393,6 +1393,9 @@ export default function AnimationGeneratorPage() {
                   </div>
                 </div>
 
+                {/* High CTR In-Result Sponsor Slot */}
+                <AdShell placement="result" />
+
                 {/* SCENES */}
                 <div>
                   <SectionTitle
@@ -1433,14 +1436,8 @@ export default function AnimationGeneratorPage() {
             )}
           </section>
         </div>
-
-        {/* FOOTER */}
-        <footer className="mt-10 border-t border-white/[0.07] py-7 text-center text-[11px] tracking-[0.16em] text-zinc-600">
-          DRIACOM — PROMPT AI GENERATOR
-        </footer>
         </div>
       </div>
-    <RewardTokenModal open={rewardOpen} onClose={() => setRewardOpen(false)} onGranted={() => { setRewardOpen(false); refreshUsage(); }} />
-</main>
+    </main>
   );
 }

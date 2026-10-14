@@ -2,92 +2,146 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import {
+  LayoutDashboard,
+  Film,
+  BookOpen,
+  ShoppingBag,
+  Sparkles,
+  Menu,
+  X,
+  Zap,
+} from "lucide-react";
 
+type Active = "dashboard" | "animation" | "storytelling" | "affiliate" | "short-story";
 
-type Active = "dashboard" | "animation" | "storytelling" | "affiliate";
+const navItems = [
+  { key: "dashboard", href: "/dashboard", label: "Dashboard", Icon: LayoutDashboard },
+  { key: "animation", href: "/generators/animation", label: "Animasi AI", Icon: Film },
+  { key: "storytelling", href: "/generators/storytelling", label: "Storytelling", Icon: BookOpen },
+  { key: "affiliate", href: "/generators/affiliate", label: "Affiliate Video", Icon: ShoppingBag },
+  { key: "short-story", href: "/generators/short-story", label: "Short Story", Icon: Sparkles },
+] as const;
+
 export default function PremiumSidebar({ active }: { active: Active }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const item = (key: Active) =>
+  const getStyle = (key: string) =>
     key === active
-      ? "border-violet-400/30 bg-gradient-to-r from-violet-600/25 to-violet-600/[0.04] text-white shadow-[0_8px_25px_rgba(139,92,246,0.08)]"
-      : "border-transparent text-zinc-400 hover:border-white/[0.06] hover:bg-white/[0.03] hover:text-white";
-
-  function closeMobile() {
-    setMobileOpen(false);
-  }
+      ? "bg-gradient-to-r from-indigo-500/15 to-cyan-500/10 border-indigo-500/40 text-white font-semibold shadow-sm shadow-indigo-950/40"
+      : "border-transparent text-zinc-400 hover:bg-white/[0.04] hover:text-zinc-200";
 
   return (
     <>
-      <aside className="hidden w-[250px] shrink-0 border-r border-white/[0.07] bg-[#070b14]/90 px-5 py-7 lg:flex lg:flex-col">
-        <Link href="/dashboard" className="border-b border-white/[0.07] pb-7">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-2">
-              <img src="/driacom-logo.png" alt="Driacom" className="h-full w-full object-contain" />
-            </div>
-            <div>
-              <div className="font-serif text-xl font-black tracking-wide text-amber-200">DRIACOM</div>
-              <div className="text-[9px] font-bold tracking-[0.28em] text-zinc-600">PROMPT AI GENERATOR</div>
-            </div>
+      {/* Desktop Sidebar */}
+      <aside className="hidden w-64 shrink-0 border-r border-white/[0.07] bg-[#07090e]/95 px-5 py-6 lg:flex lg:flex-col">
+        <Link href="/dashboard" className="flex items-center gap-3 border-b border-white/[0.06] pb-6">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] p-2 shadow-inner">
+            <img src="/driacom-logo.png" alt="Driacom" className="h-full w-full object-contain" />
+          </div>
+          <div>
+            <div className="text-base font-bold tracking-tight text-white">Driacom</div>
+            <div className="text-[10px] font-semibold tracking-wider text-cyan-400">Prompt Studio</div>
           </div>
         </Link>
 
-        <nav className="mt-7 space-y-2">
-          <div className="mb-2 px-3 text-[10px] font-black tracking-[0.22em] text-zinc-600">NAVIGASI</div>
-          <Link href="/dashboard" className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-bold transition ${item("dashboard")}`}><span className="text-amber-300">⌂</span> Dashboard</Link>
-          <Link href="/generators/animation-menu" className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-bold transition ${item("animation")}`}><span className="text-cyan-300">▣</span> Animasi</Link>
-          <Link href="/generators/storytelling-menu" className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-bold transition ${item("storytelling")}`}><span className="text-violet-300">▱</span> Storytelling</Link>
-          <Link href="/generators/affiliate" className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-bold transition ${item("affiliate")}`}><span className="text-amber-300">↗</span> Affiliate</Link>
-          
+        <nav className="mt-6 flex flex-1 flex-col gap-1.5">
+          <div className="mb-2 px-3 text-[10px] font-bold tracking-wider text-zinc-500 uppercase">
+            Menu Studio
+          </div>
+          {navItems.map((item) => {
+            const { Icon } = item;
+            const isActive = item.key === active;
+            return (
+              <Link
+                key={item.key}
+                href={item.href}
+                className={`group flex items-center gap-3 rounded-xl border px-3.5 py-2.5 text-sm transition-colors duration-150 ${getStyle(
+                  item.key
+                )}`}
+              >
+                <Icon className={`h-4 w-4 ${isActive ? "text-cyan-400" : "text-zinc-500 group-hover:text-zinc-300"}`} />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
+
+        <div className="mt-auto border-t border-white/[0.06] pt-4">
+          <div className="rounded-xl border border-indigo-500/20 bg-indigo-950/20 p-3.5">
+            <div className="flex items-center gap-2 text-xs font-semibold text-indigo-300">
+              <Zap className="h-3.5 w-3.5 text-cyan-400" />
+              <span>Akses Penuh Gratis</span>
+            </div>
+            <p className="mt-1 text-[11px] leading-relaxed text-zinc-400">
+              Semua generator prompt terbuka tanpa batas kuota & tanpa login.
+            </p>
+          </div>
+        </div>
       </aside>
 
-      <div className="w-full shrink-0 border-b border-white/[0.07] bg-[#070b14]/95 px-4 py-3 backdrop-blur-md lg:hidden">
-        <div className="flex min-h-12 items-center justify-between gap-3">
-          <Link href="/dashboard" onClick={closeMobile} className="flex min-w-0 items-center gap-2 font-serif text-base font-black tracking-[0.16em] text-amber-200">
-            <img src="/driacom-logo.png" alt="Driacom" className="h-8 w-8 shrink-0 object-contain" />
-            <span>DRIACOM</span>
+      {/* Mobile Top Navbar Bar */}
+      <div className="w-full shrink-0 border-b border-white/[0.06] bg-[#07090e]/95 px-4 py-3 backdrop-blur-md lg:hidden">
+        <div className="flex items-center justify-between gap-3">
+          <Link href="/dashboard" className="flex items-center gap-2.5">
+            <img src="/driacom-logo.png" alt="Driacom" className="h-7 w-7 object-contain" />
+            <span className="text-sm font-bold tracking-tight text-white">Driacom Studio</span>
           </Link>
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
-            aria-label="Buka menu navigasi"
-            aria-expanded={mobileOpen}
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/[0.10] bg-white/[0.025] text-2xl leading-none text-zinc-200 shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition hover:border-cyan-400/30 hover:text-white"
+            aria-label="Buka menu"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-300 transition hover:bg-white/[0.08]"
           >
-            ☰
+            <Menu className="h-5 w-5" />
           </button>
         </div>
       </div>
 
-      {mobileOpen ? (
+      {/* Mobile Drawer */}
+      {mobileOpen && (
         <div className="fixed inset-0 z-[100] lg:hidden">
-          <button type="button" aria-label="Tutup menu" onClick={closeMobile} className="absolute inset-0 bg-black/65 backdrop-blur-[2px]" />
-          <aside className="absolute inset-y-0 left-0 flex w-[min(84vw,320px)] flex-col border-r border-white/[0.09] bg-[#070b14] p-5 shadow-[20px_0_80px_rgba(0,0,0,0.55)]">
-            <div className="flex items-center justify-between gap-3 border-b border-white/[0.07] pb-5">
-              <Link href="/dashboard" onClick={closeMobile} className="flex min-w-0 items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-2">
-                  <img src="/driacom-logo.png" alt="Driacom" className="h-full w-full object-contain" />
-                </div>
-                <div className="min-w-0">
-                  <div className="font-serif text-lg font-black tracking-wide text-amber-200">DRIACOM</div>
-                  <div className="text-[8px] font-bold tracking-[0.24em] text-zinc-600">PROMPT AI GENERATOR</div>
-                </div>
+          <div
+            className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+            onClick={() => setMobileOpen(false)}
+          />
+          <aside className="absolute inset-y-0 left-0 flex w-[280px] flex-col border-r border-white/[0.08] bg-[#07090e] p-5 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
+              <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="flex items-center gap-3">
+                <img src="/driacom-logo.png" alt="Driacom" className="h-8 w-8 object-contain" />
+                <span className="text-base font-bold text-white">Driacom</span>
               </Link>
-              <button type="button" onClick={closeMobile} aria-label="Tutup menu" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 text-xl text-zinc-400 hover:text-white">×</button>
+              <button
+                type="button"
+                onClick={() => setMobileOpen(false)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-zinc-400 hover:text-white"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
 
-            <nav className="mt-6 space-y-2">
-              <div className="mb-2 px-3 text-[10px] font-black tracking-[0.22em] text-zinc-600">NAVIGASI</div>
-              <Link href="/dashboard" onClick={closeMobile} className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-sm font-bold transition ${item("dashboard")}`}><span className="text-amber-300">⌂</span> Dashboard</Link>
-              <Link href="/generators/animation-menu" onClick={closeMobile} className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-sm font-bold transition ${item("animation")}`}><span className="text-cyan-300">▣</span> Animasi</Link>
-              <Link href="/generators/storytelling-menu" onClick={closeMobile} className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-sm font-bold transition ${item("storytelling")}`}><span className="text-violet-300">▱</span> Storytelling</Link>
-              <Link href="/generators/affiliate" onClick={closeMobile} className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-sm font-bold transition ${item("affiliate")}`}><span className="text-amber-300">↗</span> Affiliate</Link>
-              
+            <nav className="mt-5 space-y-1.5">
+              {navItems.map((item) => {
+                const { Icon } = item;
+                const isActive = item.key === active;
+                return (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center gap-3 rounded-xl border px-3.5 py-3 text-sm transition ${getStyle(
+                      item.key
+                    )}`}
+                  >
+                    <Icon className={`h-4 w-4 ${isActive ? "text-cyan-400" : "text-zinc-500"}`} />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
             </nav>
           </aside>
         </div>
-      ) : null}
+      )}
     </>
   );
 }

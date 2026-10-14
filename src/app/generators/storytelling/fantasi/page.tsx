@@ -1,14 +1,4 @@
-import PremiumCategoryPage from "@/components/PremiumCategoryPage";
-
+import { redirect } from "next/navigation";
 export default function Page() {
-  return (
-    <PremiumCategoryPage
-      backHref="/generators/storytelling-menu"
-      backLabel="Storytelling"
-      eyebrow="PROMPT CERITA"
-      title="FANTASI"
-      description="Dunia fantasi, petualangan, kerajaan, kekuatan khusus, karakter, dan konflik besar."
-      tag="FANTASY"
-/>
-  );
+  redirect("/generators/storytelling?genre=Fantasi");
 }
